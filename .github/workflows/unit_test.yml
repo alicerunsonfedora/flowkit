@@ -1,0 +1,22 @@
+name: Run Unit Tests
+
+on:
+  push:
+    branches: [ "root" ]
+  pull_request:
+    branches: [ "root" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-13
+
+    steps:
+    - uses: swift-actions/setup-swift@v1
+      with:
+        swift-version: "5.9"
+    - uses: actions/checkout@v3
+    - name: Build
+      run: swift build -v
+    - name: Run tests
+      run: swift test -v
